@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ORCA v2.1 tendon explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }
+  </script>
+</head>
+<body>
+  <aside id="side">
+    <header>
+      <h1>ORCA v2.1 tendon explorer</h1>
+      <div class="sub">Right hand · Dynamixel XC-330 base · numbering from <code>hands_w_wrist.pdf</code></div>
+    </header>
+
+    <section>
+      <h2>Wrist bottom <span class="hint">(same view as diagram p.5)</span></h2>
+      <svg id="holemap" viewBox="0 0 300 200"></svg>
+      <div class="maplegend">
+        <span><i style="background:var(--I)"></i>I</span><span><i style="background:var(--M1)"></i>M1</span>
+        <span><i style="background:var(--M2)"></i>M2</span><span><i style="background:var(--P)"></i>P</span>
+        <span><i style="background:var(--T)"></i>T</span>
+      </div>
+    </section>
+
+    <section id="info" class="empty">
+      <div class="placeholder">Click a hole on the map, a marker at the bottom of the wrist, or an entry in the list.</div>
+    </section>
+
+    <section>
+      <h2>All tendons</h2>
+      <div id="list"></div>
+    </section>
+
+    <footer class="sub credit">
+      Model: <a href="https://github.com/orcahand/orcahand_hardware">ORCA Hand</a> by ORCA Dexterity, Inc. —
+      <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+    </footer>
+  </aside>
+
+  <main id="view">
+    <div id="toolbar">
+      <button id="btnFocus" title="Frame the selected tendon (F)">Focus</button>
+      <button id="btnReset" title="Show whole hand (R)">Reset view</button>
+      <label><input type="checkbox" id="chkHull"> Forearm shell</label>
+      <label><input type="checkbox" id="chkTower" checked> Motors / spools</label>
+      <label><input type="checkbox" id="chkAll" checked> All tendons</label>
+      <label>X-ray <input type="range" id="rngOpacity" min="0.05" max="1" step="0.05" value="0.28"></label>
+    </div>
+    <div id="legend3d">
+      <div><span class="sw sel"></span>selected tendon</div>
+      <div><span class="sw anta"></span>antagonist (opposite direction)</div>
+      <div><span class="sw seg"></span>segment it moves · ◯ joint</div>
+      <div class="note">Spool → wrist → carpals is traced from the CAD channels. Inside the fingers (faded part) the path is schematic.</div>
+    </div>
+    <div id="loading">Loading model…</div>
+    <div id="tip"></div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

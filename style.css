@@ -1,0 +1,71 @@
+:root {
+  --I: #8e44ad; --M1: #2f6fde; --M2: #27a844; --P: #d63031; --T: #f39c12;
+  --sel: #ffd400; --anta: #00e0ff; --bg: #14161b; --panel: #1d2027; --fg: #e6e8ee; --dim: #8a90a0;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+body { display: flex; }
+#side { width: 380px; min-width: 380px; height: 100%; overflow-y: auto; background: var(--panel);
+  border-right: 1px solid #2c3040; padding: 12px 14px 30px; }
+#view { flex: 1; position: relative; overflow: hidden; }
+canvas { display: block; }
+h1 { font-size: 17px; margin: 0 0 2px; }
+h2 { font-size: 13px; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); }
+.hint { text-transform: none; letter-spacing: 0; font-weight: normal; }
+.sub { color: var(--dim); font-size: 12px; }
+code { font-size: 11px; }
+
+#holemap { width: 100%; background: #111318; border-radius: 6px; }
+#holemap .hole { cursor: pointer; }
+#holemap .hole circle { stroke: #000; stroke-width: 1; }
+#holemap .hole text { font-size: 8.5px; fill: #fff; text-anchor: middle; dominant-baseline: central;
+  pointer-events: none; font-weight: 600; }
+#holemap .hole.sel circle { stroke: var(--sel); stroke-width: 3; }
+#holemap .hole.anta circle { stroke: var(--anta); stroke-width: 3; }
+#holemap .hole:hover circle { stroke: #fff; stroke-width: 2; }
+#holemap .axis { fill: var(--dim); font-size: 8px; }
+.maplegend { display: flex; gap: 12px; margin-top: 6px; color: var(--dim); }
+.maplegend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+
+#info { background: #252935; border-radius: 8px; padding: 10px 12px; margin-top: 14px; }
+#info.empty .placeholder { color: var(--dim); }
+#info .title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+#info .num { display: inline-flex; width: 34px; height: 34px; border-radius: 50%; align-items: center;
+  justify-content: center; color: #fff; border: 3px solid var(--sel); font-size: 15px; }
+#info .num.anta { border-color: var(--anta); width: 26px; height: 26px; font-size: 12px; cursor: pointer; }
+#info .action { margin: 6px 0 8px; font-size: 14px; }
+#info table { width: 100%; border-collapse: collapse; }
+#info td { padding: 2px 0; vertical-align: top; }
+#info td:first-child { color: var(--dim); width: 112px; }
+#info .antarow { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #343a4a; }
+#info .route { margin-top: 8px; color: var(--dim); font-size: 12px; }
+
+#list .finger { margin-bottom: 8px; }
+#list .fname { font-weight: 600; margin-bottom: 3px; }
+#list .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+#list button { all: unset; cursor: pointer; padding: 3px 6px; border-radius: 4px; background: #262a35;
+  display: flex; gap: 6px; align-items: center; }
+#list button:hover { background: #303646; }
+#list button.sel { outline: 2px solid var(--sel); }
+#list button.anta { outline: 2px solid var(--anta); }
+#list button b { display: inline-block; min-width: 20px; text-align: center; border-radius: 3px; color: #fff; }
+
+#toolbar { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; gap: 10px; align-items: center;
+  flex-wrap: wrap; pointer-events: none; }
+#toolbar > * { pointer-events: auto; }
+#toolbar button { background: #2a2f3c; color: var(--fg); border: 1px solid #3a4152; border-radius: 5px;
+  padding: 5px 10px; cursor: pointer; }
+#toolbar button:hover { background: #343b4c; }
+#toolbar label { background: rgba(29, 32, 39, .85); padding: 4px 8px; border-radius: 5px; display: flex; gap: 5px; align-items: center; }
+#legend3d { position: absolute; bottom: 10px; left: 10px; background: rgba(29, 32, 39, .88); padding: 8px 10px;
+  border-radius: 6px; font-size: 12px; max-width: 330px; }
+#legend3d .sw { display: inline-block; width: 22px; height: 5px; border-radius: 3px; margin-right: 6px; vertical-align: 2px; }
+#legend3d .sel { background: var(--sel); } #legend3d .anta { background: var(--anta); }
+#legend3d .seg { background: #ff6ad5; }
+#legend3d .note { color: var(--dim); margin-top: 4px; }
+#loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--dim); }
+#tip { position: absolute; pointer-events: none; background: rgba(0, 0, 0, .8); padding: 3px 7px; border-radius: 4px;
+  font-size: 12px; display: none; white-space: nowrap; }
+.credit { margin-top: 16px; }
+.credit a { color: var(--dim); }
